@@ -1,28 +1,42 @@
 package ru.skogmark.life.console;
 
-import ru.skogmark.life.core.FrameEventListenerComposite;
-import ru.skogmark.life.core.Game;
-import ru.skogmark.life.core.GameFactory;
-import ru.skogmark.life.core.generation.SimpleInitialFrameGenerator;
+import ru.skogmark.life.console.command.CommandHandler;
+import ru.skogmark.life.console.command.ConsoleCommand;
+import ru.skogmark.life.console.command.StartCommandHandler;
+import ru.skogmark.life.console.command.StopCommandHandler;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.Optional;
 
 public class ConsoleLauncher {
 
-    private static final int DEFAULT_HEIGHT = 20;
-    private static final int DEFAULT_WIDTH = 40;
-    private static final int DEFAULT_POPULATION_DENSITY = 5;
-
     public static void main(String[] args) {
-        try {
-            GameFactory gameFactory = new GameFactory();
-            FrameEventListenerComposite frameListener = new FrameEventListenerComposite();
-            frameListener.addListener(new SystemOutPrinterFrameListener());
-
-            Game game = gameFactory.getGame(
-                    frameListener,
-                    new SimpleInitialFrameGenerator(DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_POPULATION_DENSITY));
-            game.start();
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+            LauncherContext launcherContext = new LauncherContext();
+            while (!launcherContext.isTerminated()) {
+                String inputLine = reader.readLine();
+                if (inputLine != null) {
+                    Optional<ConsoleCommand> consoleCommand = ConsoleCommand.byCode(inputLine.toLowerCase());
+                    if (consoleCommand.isPresent()) {
+                        CommandHandler commandHandler = createCommandHandler(consoleCommand.get());
+                        commandHandler.handle(launcherContext);
+                    }
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private static CommandHandler createCommandHandler(ConsoleCommand consoleCommand) {
+        switch (consoleCommand) {
+            case START:
+                return new StartCommandHandler();
+            case STOP:
+                return new StopCommandHandler();
+            default:
+                throw new IllegalArgumentException("Unexpected command: command=" + consoleCommand);
         }
     }
 }
