@@ -1,11 +1,11 @@
-package ru.skogmark.life.terminal;
+package ru.skogmark.life.console;
 
 import ru.skogmark.life.core.FrameEventListenerComposite;
 import ru.skogmark.life.core.Game;
 import ru.skogmark.life.core.GameFactory;
 import ru.skogmark.life.core.generation.SimpleInitialFrameGenerator;
 
-public class IdeaLauncher {
+public class ConsoleLauncher {
 
     private static final int DEFAULT_HEIGHT = 20;
     private static final int DEFAULT_WIDTH = 40;

@@ -1,4 +1,4 @@
-package ru.skogmark.life.terminal;
+package ru.skogmark.life.console;
 
 import ru.skogmark.life.core.Cell;
 import ru.skogmark.life.core.Frame;

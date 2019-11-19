@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>life-terminal</artifactId>
+    <artifactId>life-console</artifactId>
 
     <dependencies>
         <dependency>
@@ -29,6 +29,11 @@
                     <source>${jdk.version}</source>
                     <target>${jdk.version}</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.0</version>
             </plugin>
         </plugins>
     </build>
