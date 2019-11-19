@@ -6,6 +6,7 @@ import ru.skogmark.life.core.Frame;
 import java.util.Random;
 
 public class SimpleInitialFrameGenerator implements InitialFrameGenerator {
+
     private final int initialWidth;
     private final int initialHeight;
     private final int initialPopulationDensity;

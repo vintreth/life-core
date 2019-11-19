@@ -1,6 +1,5 @@
 package ru.skogmark.life.core;
 
-import javax.validation.constraints.NotNull;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Optional;
@@ -9,6 +8,7 @@ import java.util.stream.Collectors;
 import static java.util.Objects.requireNonNull;
 
 public class Frame {
+
     private final Cell[][] grid;
 
     public Frame(int width, int height) {
@@ -24,17 +24,10 @@ public class Frame {
         }
     }
 
-    public void putCell(@NotNull Cell cell) {
+    public void putCell(Cell cell) {
         requireNonNull(cell, "cell");
         checkGrid(cell.getXPos(), cell.getYPos());
         grid[cell.getYPos()][cell.getXPos()] = cell;
-    }
-
-    Optional<Cell> getCell(int xPos, int yPos) {
-        if (isSizeInBound(xPos, yPos)) {
-            return Optional.of(grid[yPos][xPos]);
-        }
-        return Optional.empty();
     }
 
     private void checkGrid(int xPos, int yPos) {
@@ -42,6 +35,13 @@ public class Frame {
             throw new RuntimeException("Unable to access cell by its coordinates: xPos=" + xPos + ", yPos=" + yPos
                     + ", grid.sizes=" + grid.length + "x" + grid[0].length);
         }
+    }
+
+    Optional<Cell> getCell(int xPos, int yPos) {
+        if (isSizeInBound(xPos, yPos)) {
+            return Optional.of(grid[yPos][xPos]);
+        }
+        return Optional.empty();
     }
 
     private boolean isSizeInBound(int xPos, int yPos) {
@@ -110,7 +110,7 @@ public class Frame {
     public static class Row {
         private final Cell[] row;
 
-        public Row(Cell[] row) {
+        Row(Cell[] row) {
             this.row = row;
         }
 

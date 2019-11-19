@@ -2,27 +2,29 @@ package ru.skogmark.life.core;
 
 import ru.skogmark.life.core.generation.InitialFrameGenerator;
 
-import javax.validation.constraints.NotNull;
 import java.util.LinkedList;
 
 import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
 
-public class Universe {
-    static final int LOWER_LIFE_LIMIT = 1;
-    static final int UPPER_LIFE_LIMIT = 4;
-    static final int BORN_CONDITION = 3;
+class Universe {
+
+    static final int LOWER_LIFE_LIMIT_CELLS = 1;
+    static final int UPPER_LIFE_LIMIT_CELLS = 4;
+    static final int BORN_CONDITION_CELLS = 3;
+
+    private static final int HISTORY_VOLUME_FRAMES = 10;
 
     private final FrameListener frameListener;
     private final InitialFrameGenerator initialFrameGenerator;
     private final LinkedList<Frame> frames = new LinkedList<>();
 
-    public Universe(@NotNull FrameListener frameListener, @NotNull InitialFrameGenerator initialFrameGenerator) {
+    Universe(FrameListener frameListener, InitialFrameGenerator initialFrameGenerator) {
         this.frameListener = requireNonNull(frameListener, "frameListener");
         this.initialFrameGenerator = requireNonNull(initialFrameGenerator, "initialFrameGenerator");
     }
 
-    public void refresh() {
+    void refresh() {
         Frame prevFrame = frames.isEmpty() ? null : frames.getLast();
         Frame nextFrame;
         if (isNull(prevFrame)) {
@@ -60,15 +62,15 @@ public class Universe {
     }
 
     private static boolean canCellStayAlive(int aliveNeightboursCount) {
-        return LOWER_LIFE_LIMIT < aliveNeightboursCount && aliveNeightboursCount < UPPER_LIFE_LIMIT;
+        return LOWER_LIFE_LIMIT_CELLS < aliveNeightboursCount && aliveNeightboursCount < UPPER_LIFE_LIMIT_CELLS;
     }
 
     private static boolean canCellBeBorn(int aliveNeightboursCount) {
-        return aliveNeightboursCount == BORN_CONDITION;
+        return aliveNeightboursCount == BORN_CONDITION_CELLS;
     }
 
     private void addFrame(Frame frame) {
-        if (frames.size() >= 10) {
+        if (frames.size() >= HISTORY_VOLUME_FRAMES) {
             frames.removeFirst();
         }
         frames.addLast(frame);

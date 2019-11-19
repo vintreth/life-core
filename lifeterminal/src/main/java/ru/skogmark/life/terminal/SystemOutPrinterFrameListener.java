@@ -1,8 +1,13 @@
-package ru.skogmark.life.core;
+package ru.skogmark.life.terminal;
+
+import ru.skogmark.life.core.Cell;
+import ru.skogmark.life.core.Frame;
+import ru.skogmark.life.core.FrameListener;
 
 import java.util.stream.IntStream;
 
-public class SimpleSystemOutPrinterFrameListener implements FrameListener {
+public class SystemOutPrinterFrameListener implements FrameListener {
+
     private static final char ALIVE_CELL = '\u2593';
     private static final char DEAD_CELL = '\u2591';
 
@@ -23,10 +28,6 @@ public class SimpleSystemOutPrinterFrameListener implements FrameListener {
 
     private static void print(char c) {
         System.out.print(c);
-    }
-
-    private static void print(String symbols) {
-        System.out.print(symbols);
     }
 
     private static void newLine() {

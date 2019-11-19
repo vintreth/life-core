@@ -10,7 +10,17 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>lifecore</module>
+        <module>lifeterminal</module>
     </modules>
 
+    <properties>
+        <java.version>1.8</java.version>
+        <jdk.version>1.8</jdk.version>
+        <javaee-api.version>7.0</javaee-api.version>
+        <junit.version>4.12</junit.version>
+        <log4j.version>1.2.17</log4j.version>
+        <slf4j.version>1.7.5</slf4j.version>
+        <mockito.version>2.0.2-beta</mockito.version>
+    </properties>
 
 </project>

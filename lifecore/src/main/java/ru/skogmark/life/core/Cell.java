@@ -1,8 +1,8 @@
 package ru.skogmark.life.core;
 
-import javax.validation.constraints.NotNull;
 
 public class Cell {
+
     private final boolean alive;
     private final int xPos;
     private final int yPos;
@@ -13,22 +13,24 @@ public class Cell {
         this.yPos = yPos;
     }
 
-    @NotNull
     public static Cell newDeadCell(int xPos, int yPos) {
         return new Cell(false, xPos, yPos);
     }
 
-    @NotNull
     public static Cell newAliveCell(int xPos, int yPos) {
         return new Cell(true, xPos, yPos);
     }
 
     @Override
     public String toString() {
-        return alive ? "\u2588" : " ";
+        return "Cell{" +
+                "alive=" + alive +
+                ", xPos=" + xPos +
+                ", yPos=" + yPos +
+                '}';
     }
 
-    boolean isAlive() {
+    public boolean isAlive() {
         return alive;
     }
 

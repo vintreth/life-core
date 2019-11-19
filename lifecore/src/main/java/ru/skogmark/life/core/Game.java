@@ -1,6 +1,6 @@
 package ru.skogmark.life.core;
 
-import javax.validation.constraints.NotNull;
+import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
@@ -8,15 +8,15 @@ import java.util.concurrent.TimeUnit;
 import static java.util.Objects.requireNonNull;
 
 public class Game {
+
     private static final int FPS_RATE = 1;
 
-    private final ScheduledExecutorService executor;
     private final Universe universe;
+    private final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
 
     private ScheduledFuture<?> future;
 
-    public Game(@NotNull ScheduledExecutorService executor, Universe universe) {
-        this.executor = requireNonNull(executor, "executor");
+    Game(Universe universe) {
         this.universe = requireNonNull(universe, "universe");
     }
 

@@ -48,11 +48,11 @@ public class UniverseTest {
 
                 int aliveNeightboursCount = firstFrame.getAliveNeightboursCount(cell.get());
                 if (cell.get().isAlive()) {
-                    assertTrue(aliveNeightboursCount > Universe.LOWER_LIFE_LIMIT);
-                    assertTrue(aliveNeightboursCount < Universe.UPPER_LIFE_LIMIT);
+                    assertTrue(aliveNeightboursCount > Universe.LOWER_LIFE_LIMIT_CELLS);
+                    assertTrue(aliveNeightboursCount < Universe.UPPER_LIFE_LIMIT_CELLS);
 
                     if (!prevCell.get().isAlive()) {
-                        assertTrue(aliveNeightboursCount == Universe.BORN_CONDITION);
+                        assertTrue(aliveNeightboursCount == Universe.BORN_CONDITION_CELLS);
                     }
                 }
             }

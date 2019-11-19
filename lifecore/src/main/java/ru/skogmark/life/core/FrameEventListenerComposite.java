@@ -1,12 +1,12 @@
 package ru.skogmark.life.core;
 
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Objects.requireNonNull;
 
-public class FrameEventService implements FrameListener {
+public class FrameEventListenerComposite implements FrameListener {
+
     private final List<FrameListener> frameListeners = new ArrayList<>();
 
     public void addListener(FrameListener frameListener) {
@@ -14,7 +14,7 @@ public class FrameEventService implements FrameListener {
     }
 
     @Override
-    public void onFrameRefreshed(@NotNull Frame newFrame) {
+    public void onFrameRefreshed(Frame newFrame) {
         requireNonNull(newFrame);
         frameListeners.forEach(frameListener -> frameListener.onFrameRefreshed(newFrame));
     }
