@@ -10,6 +10,7 @@ public class StopCommandHandler implements CommandHandler {
             launcherContext.getGame().stop();
         }
 
+        TextPreloader.println("Terminating the game", 5000);
         launcherContext.setTerminated(true);
     }
 }

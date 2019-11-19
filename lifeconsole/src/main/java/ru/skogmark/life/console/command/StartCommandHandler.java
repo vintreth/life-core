@@ -15,6 +15,8 @@ public class StartCommandHandler implements CommandHandler {
 
     @Override
     public void handle(LauncherContext launcherContext) {
+        TextPreloader.println("Starting the game", 5000);
+
         FrameEventListenerComposite frameListener = new FrameEventListenerComposite();
         frameListener.addListener(new SystemOutPrinterFrameListener());
 

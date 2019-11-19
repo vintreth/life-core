@@ -12,6 +12,8 @@ import java.util.Optional;
 public class ConsoleLauncher {
 
     public static void main(String[] args) {
+        printText("Enter command: ");
+
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
             LauncherContext launcherContext = new LauncherContext();
             while (!launcherContext.isTerminated()) {
@@ -27,6 +29,10 @@ public class ConsoleLauncher {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private static void printText(String text) {
+        System.out.print(text);
     }
 
     private static CommandHandler createCommandHandler(ConsoleCommand consoleCommand) {
