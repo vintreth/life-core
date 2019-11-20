@@ -41,4 +41,24 @@ public class Cell {
     int getYPos() {
         return yPos;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Cell cell = (Cell) o;
+
+        if (alive != cell.alive) return false;
+        if (xPos != cell.xPos) return false;
+        return yPos == cell.yPos;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (alive ? 1 : 0);
+        result = 31 * result + xPos;
+        result = 31 * result + yPos;
+        return result;
+    }
 }

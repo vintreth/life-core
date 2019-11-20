@@ -91,8 +91,23 @@ public class Frame {
                 "\n}";
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Frame frame = (Frame) o;
+
+        return Arrays.deepEquals(grid, frame.grid);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.deepHashCode(grid);
+    }
+
     public Iterable<Row> getRows() {
-        return () -> new Iterator<Row>() {
+        return () -> new Iterator<>() {
             private int index;
 
             @Override
@@ -115,7 +130,7 @@ public class Frame {
         }
 
         public Iterable<Cell> getCells() {
-            return () -> new Iterator<Cell>() {
+            return () -> new Iterator<>() {
                 private int index;
 
                 @Override

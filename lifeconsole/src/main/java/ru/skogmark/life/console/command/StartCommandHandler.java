@@ -9,8 +9,8 @@ import ru.skogmark.life.core.generation.SimpleInitialFrameGenerator;
 
 public class StartCommandHandler implements CommandHandler {
 
-    private static final int DEFAULT_HEIGHT = 20;
-    private static final int DEFAULT_WIDTH = 40;
+    private static final int DEFAULT_HEIGHT = 40;
+    private static final int DEFAULT_WIDTH = 80;
     private static final int DEFAULT_POPULATION_DENSITY = 5;
 
     @Override

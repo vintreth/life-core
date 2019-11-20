@@ -21,7 +21,13 @@ public class Game {
     }
 
     public void start() {
-        future = executor.scheduleWithFixedDelay(universe::refresh, 0, FPS_RATE, TimeUnit.SECONDS);
+        future = executor.scheduleWithFixedDelay(() -> {
+            UniverseStatus status = universe.refresh();
+            if (status == UniverseStatus.GAME_OVER) {
+                System.out.println("Game over");
+                stop();
+            }
+        }, 0, FPS_RATE, TimeUnit.SECONDS);
     }
 
     public void pause() {
@@ -32,6 +38,7 @@ public class Game {
         if (!future.isCancelled()) {
             future.cancel(true);
         }
+
         try {
             if (!executor.awaitTermination(1, TimeUnit.SECONDS)) {
                 executor.shutdownNow();

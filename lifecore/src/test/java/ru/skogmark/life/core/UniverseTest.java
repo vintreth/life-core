@@ -3,13 +3,14 @@ package ru.skogmark.life.core;
 import org.junit.Test;
 import ru.skogmark.life.core.generation.SimpleInitialFrameGenerator;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.*;
 
 public class UniverseTest {
     @Test
-    public void shouldGenerateInitialFrame() {
+    public void should_generate_initial_frame() {
         // given
         TestFrameListener frameListener = new TestFrameListener();
         Universe universe = new Universe(frameListener, new SimpleInitialFrameGenerator(20, 20, 5));
@@ -29,7 +30,7 @@ public class UniverseTest {
     }
 
     @Test
-    public void shouldGenerateNextFrame() {
+    public void should_generate_next_frame() {
         // given
         TestFrameListener frameListener = new TestFrameListener();
         Universe universe = new Universe(frameListener, new SimpleInitialFrameGenerator(20, 20, 5));
@@ -57,6 +58,34 @@ public class UniverseTest {
                 }
             }
         }
+    }
+
+    @Test
+    public void should_return_gameOver_when_new_frame_equals_to_one_of_prev() {
+        Frame frame0 = new Frame(2, 2);
+        frame0.putCell(Cell.newDeadCell(0, 0));
+        frame0.putCell(Cell.newDeadCell(1, 0));
+        frame0.putCell(Cell.newAliveCell(0, 1));
+        frame0.putCell(Cell.newDeadCell(1, 1));
+
+        Frame frame1 = new Frame(2, 2);
+        frame1.putCell(Cell.newDeadCell(0, 0));
+        frame1.putCell(Cell.newAliveCell(1, 0));
+        frame1.putCell(Cell.newAliveCell(0, 1));
+        frame1.putCell(Cell.newDeadCell(1, 1));
+
+        Frame newFrame = new Frame(2, 2);
+        newFrame.putCell(Cell.newDeadCell(0, 0));
+        newFrame.putCell(Cell.newDeadCell(1, 0));
+        newFrame.putCell(Cell.newAliveCell(0, 1));
+        newFrame.putCell(Cell.newDeadCell(1, 1));
+
+        List<Frame> frames = List.of(frame0, frame1);
+
+        // when
+        boolean result = Universe.isGameOver(newFrame, frames);
+        // then
+        assertTrue(result);
     }
 
     private static class TestFrameListener implements FrameListener {
