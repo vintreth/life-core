@@ -1,6 +1,6 @@
 package ru.skogmark.life.console.command;
 
-import ru.skogmark.life.console.LauncherContext;
+import ru.skogmark.life.console.GameContext;
 import ru.skogmark.life.console.SystemOutPrinterFrameListener;
 import ru.skogmark.life.core.FrameEventListenerComposite;
 import ru.skogmark.life.core.Game;
@@ -14,7 +14,7 @@ public class StartCommandHandler implements CommandHandler {
     private static final int DEFAULT_POPULATION_DENSITY = 5;
 
     @Override
-    public void handle(LauncherContext launcherContext) {
+    public void handle(GameContext gameContext) {
         TextPreloader.println("Starting the game", 5000);
 
         FrameEventListenerComposite frameListener = new FrameEventListenerComposite();
@@ -25,7 +25,7 @@ public class StartCommandHandler implements CommandHandler {
                 frameListener,
                 new SimpleInitialFrameGenerator(DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_POPULATION_DENSITY));
 
-        launcherContext.setGame(game);
+        gameContext.setGame(game);
 
         game.start();
     }

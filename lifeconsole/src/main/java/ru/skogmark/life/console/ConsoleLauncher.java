@@ -15,14 +15,14 @@ public class ConsoleLauncher {
         printText("Enter command: ");
 
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
-            LauncherContext launcherContext = new LauncherContext();
-            while (!launcherContext.isTerminated()) {
+            GameContext gameContext = new GameContext();
+            while (!gameContext.isTerminated()) {
                 String inputLine = reader.readLine();
                 if (inputLine != null) {
                     Optional<ConsoleCommand> consoleCommand = ConsoleCommand.byCode(inputLine.toLowerCase());
                     if (consoleCommand.isPresent()) {
                         CommandHandler commandHandler = createCommandHandler(consoleCommand.get());
-                        commandHandler.handle(launcherContext);
+                        commandHandler.handle(gameContext);
                     }
                 }
             }

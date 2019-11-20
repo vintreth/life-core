@@ -2,7 +2,7 @@ package ru.skogmark.life.console;
 
 import ru.skogmark.life.core.Game;
 
-public class LauncherContext {
+public class GameContext {
 
     private Game game;
     private boolean terminated;
